@@ -16,7 +16,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.lilworldcup.opqr"
     },
     "android": {
       "adaptiveIcon": {
@@ -31,7 +32,15 @@
     },
     "plugins": [
       "expo-router",
-      "expo-font"
+      "expo-font",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(OPQR) to access your camera",
+          "microphonePermission": "Allow $(OPQR) to access your microphone",
+          "recordAudioAndroid": true
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
@@ -43,6 +52,7 @@
       "eas": {
         "projectId": "b509d2c5-2ced-4b1c-b941-bec3105f798c"
       }
-    }
+    },
+    "owner": "lilworldcup"
   }
 }
