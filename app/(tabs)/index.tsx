@@ -1,48 +1,37 @@
-import { ExternalLink } from '@tamagui/lucide-icons'
-import { Anchor, H2, Paragraph, XStack, YStack } from 'tamagui'
-import { ToastControl } from 'app/CurrentToast'
+import React from 'react';
+import { View, Paragraph, SizableText, Button, Group, ListItem, Separator, XGroup, YGroup, YStack, XStack } from 'tamagui';
+import { Link } from 'expo-router';
 
-export default function TabOneScreen() {
-  return (
-    <YStack f={1} ai="center" gap="$8" px="$10" pt="$5">
-      <H2>Tamagui + Expo</H2>
-
-      <ToastControl />
-
-      <XStack ai="center" jc="center" fw="wrap" gap="$1.5" pos="absolute" b="$8">
-        <Paragraph fos="$5">Add</Paragraph>
-
-        <Paragraph fos="$5" px="$2" py="$1" col="$blue10" bg="$blue5" br="$3">
-          tamagui.config.ts
-        </Paragraph>
-
-        <Paragraph fos="$5">to root and follow the</Paragraph>
-
-        <XStack
-          ai="center"
-          gap="$1.5"
-          px="$2"
-          py="$1"
-          br="$3"
-          bg="$purple5"
-          hoverStyle={{ bg: '$purple6' }}
-          pressStyle={{ bg: '$purple4' }}
-        >
-          <Anchor
-            href="https://tamagui.dev/docs/core/configuration"
-            textDecorationLine="none"
-            col="$purple10"
-            fos="$5"
-          >
-            Configuration guide
-          </Anchor>
-          <ExternalLink size="$1" col="$purple10" />
+export default function index() {
+    return (
+        <XStack flex={1} alignItems="center" justifyContent="center" >
+            <YStack flex={1} alignItems="center" justifyContent="center" >
+                <YGroup px="$4">
+                    <YGroup.Item>
+                        <Group orientation="horizontal" height="$20">
+                            <Group.Item >
+                                <Link href="/scan" asChild>
+                                    <Button height="100%" size="$5" width="50%">Add Device</Button>
+                                </Link>
+                            </Group.Item>
+                            <Group.Item >
+                                <Link href="/scan" asChild>
+                                    <Button height="100%" size="$5" width="50%">Checkout Device</Button>
+                                </Link>
+                            </Group.Item>
+                        </Group>
+                    </YGroup.Item>
+                    <YGroup.Item >
+                        <Group orientation="horizontal" height="$20">
+                            <Group.Item >
+                                <Link href="/modal" asChild>
+                                    <Button height="100%" size="$5" width="100%">Device Info</Button>
+                                </Link>
+                            </Group.Item>
+                        </Group>
+                    </YGroup.Item>
+                </YGroup>
+            </YStack>
         </XStack>
-
-        <Paragraph fos="$5" ta="center">
-          to configure your themes and tokens.
-        </Paragraph>
-      </XStack>
-    </YStack>
-  )
+    );
 }
