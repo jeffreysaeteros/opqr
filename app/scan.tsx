@@ -1,26 +1,45 @@
-import { ExternalLink } from '@tamagui/lucide-icons'
-import { View, Text, Button, Anchor, H2, Paragraph, XStack, YStack } from 'tamagui'
-import { ToastControl } from 'app/CurrentToast'
-import { CameraView, useCameraPermissions } from 'expo-camera';
+import { CameraView, useCameraPermissions, BarcodeScanningResult } from 'expo-camera';
 import { useState } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { View, Text, Button, YStack } from 'tamagui';
+import { useRouter } from 'expo-router';
 
 export default function Scan() {
     const [facing, setFacing] = useState<any>('back');
     const [permission, requestPermission] = useCameraPermissions();
+    const [scannedResult, setScannedResult] = useState<BarcodeScanningResult | null>(null);
+    const router = useRouter();
 
     if (!permission) {
-        // Camera permissions are still loading.
         return <View />;
     }
 
     if (!permission.granted) {
-        // Camera permissions are not granted yet.
         return (
             <View>
                 <Text>We need your permission to show the camera</Text>
-                <Button onPress={requestPermission}></Button>
+                <Button onPress={requestPermission}>Grant permission</Button>
             </View>
+        );
+    }
+
+    const handleBarCodeScanned = (result: BarcodeScanningResult) => {
+        setScannedResult(result);
+    };
+
+    const handleScanAgain = () => {
+        setScannedResult(null);
+    };
+
+    if (scannedResult) {
+        return (
+            <YStack flex={1} justifyContent="center" alignItems="center" padding="$4">
+                <Text fontSize={18} marginBottom={10}>Barcode Type:</Text>
+                <Text fontSize={24} fontWeight="bold" marginBottom={20}>{scannedResult.type}</Text>
+                <Text fontSize={18} marginBottom={10}>Scanned Data:</Text>
+                <Text fontSize={24} fontWeight="bold" marginBottom={40}>{scannedResult.data}</Text>
+                <Button onPress={handleScanAgain}>Scan Again</Button>
+            </YStack>
         );
     }
 
@@ -30,9 +49,10 @@ export default function Scan() {
                 barcodeScannerSettings={{
                     barcodeTypes: ["qr"],
                 }}
-                style={styles.camera} facing={facing}
-            >
-            </CameraView>
+                onBarcodeScanned={handleBarCodeScanned}
+                style={styles.camera}
+                facing={facing}
+            />
         </View>
     );
 }
@@ -45,21 +65,5 @@ const styles = StyleSheet.create({
     camera: {
         flex: 1,
         aspectRatio: 0.6,
-    },
-    buttonContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        backgroundColor: 'transparent',
-        margin: 64,
-    },
-    button: {
-        flex: 1,
-        alignSelf: 'flex-end',
-        alignItems: 'center',
-    },
-    text: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        color: 'white',
     },
 });

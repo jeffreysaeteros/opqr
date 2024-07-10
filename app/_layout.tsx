@@ -22,7 +22,7 @@ SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
 
-  const [scannedData, setScannedData] = useState<any>('');
+  const [scannedData, setScannedData] = useState<any>('')
 
   const [interLoaded, interError] = useFonts({
     Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
@@ -41,9 +41,8 @@ export default function RootLayout() {
   }
 
   const handleBarCodeScanned = (data) => {
-    setScannedData(data);
-  };
-
+    setScannedData(data)
+  }
 
   return <RootLayoutNav />
 }
@@ -76,11 +75,8 @@ function RootLayoutNav() {
           <Stack.Screen
             name="scan"
             options={{
-              title: 'Scan QR Code',
               presentation: 'modal',
-              animation: 'slide_from_right',
-              gestureEnabled: true,
-              gestureDirection: 'horizontal',
+              title: 'Scan QR Code',
             }}
           />
         </Stack>
