@@ -23,7 +23,11 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -50,7 +54,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "b509d2c5-2ced-4b1c-b941-bec3105f798c"
+        "projectId": "d999d398-3db0-477c-91cf-80140e713ef6"
       }
     },
     "owner": "lilworldcup"

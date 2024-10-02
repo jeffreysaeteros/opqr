@@ -44,10 +44,10 @@ export function ListPage() {
     const rawData = await FetchData();
     console.log('rawData:', rawData);
     const formattedData = rawData.map((item: any[]) => ({
-      serialNumber: item[4],
-      computerName: item[5],
+      serialNumber: item[3],
+      computerName: item[4],
       deviceType: item[1],
-      model: item[6],
+      model: item[5],
       description: `${item[1]}, ${item[6]}`,
       imageUrl: `https://example.com/images/${item[0]}.jpg` // Placeholder for image URLs
     }));
@@ -85,7 +85,7 @@ export function ListPage() {
       <XStack $sm={{ flexDirection: 'column' }} paddingHorizontal="$4" paddingVertical="$4" space>
         <InputDemo
           size="$4"
-          placeholder="Serial #, Computer Name, Device Type, or Model"
+          placeholder="Serial #, Name, Type, or Model"
           value={searchQuery}
           onChangeText={setSearchQuery}
         />

@@ -52,7 +52,7 @@ function RootLayoutNav() {
 
   return (
     <Provider>
-      <ThemeProvider value={colorScheme === 'light' ? DarkTheme : DefaultTheme}>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DarkTheme}>
         <Stack>
           <Stack.Screen
             name="(tabs)"
@@ -77,6 +77,22 @@ function RootLayoutNav() {
             options={{
               presentation: 'modal',
               title: 'Scan QR Code',
+            }}
+          />
+
+          <Stack.Screen
+            name="add_device_scan"
+            options={{
+              presentation: 'modal',
+              title: 'Add Device',
+            }}
+          />
+
+          <Stack.Screen
+            name="checkout_device_scan"
+            options={{
+              presentation: 'modal',
+              title: 'Checkout Device',
             }}
           />
         </Stack>
